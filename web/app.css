@@ -1,0 +1,106 @@
+/* Aula Meteo — own rules, after common.css. */
+body{background:var(--ground)}
+.site-header h1 a.home{text-decoration:none}
+.topnav{display:flex;gap:18px;font-size:15px}
+.topnav a{text-decoration-color:var(--line)}
+
+/* Day page: text on the left, sticky map on the right */
+.daygrid{max-width:1440px;margin:0 auto;padding:8px 16px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px;align-items:start}
+.story{max-width:68ch}
+.story p,.story li{hyphens:auto}
+.story h3.label{margin:26px 0 6px;font-size:17px;color:var(--muted)}
+.headline{margin:6px 0 8px;font:700 clamp(28px,3.4vw,40px)/1.05 var(--font-title);letter-spacing:.01em}
+.standfirst{margin:0 0 6px;font-size:19px;color:var(--muted)}
+.daynav{display:flex;justify-content:space-between;font-size:14px}
+.daynav a{text-decoration-color:var(--line)}
+a.concept{text-decoration-style:dotted;text-decoration-thickness:1.5px;cursor:help}
+a.view{font-family:var(--font-title);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.82em;color:var(--accent);text-decoration:none;white-space:nowrap}
+a.view::before{content:"◎ "}
+a.view:hover{text-decoration:underline}
+.lesson{margin-top:24px}
+.lesson h3.label{margin:0 0 6px;color:var(--accent)}
+.lesson ol{padding-left:1.3em}
+.chart{margin-top:24px}
+.chart h2{margin:0 0 6px;font-size:20px}
+.chart img{display:block;width:100%;height:auto;border:1px solid var(--line);margin-top:8px}
+
+.mapcol{position:sticky;top:10px;display:grid;gap:10px}
+.mapbox{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+#map{height:min(68vh,720px);min-height:360px}
+.timebar{display:flex;align-items:center;gap:10px;padding:8px 10px;border-top:1px solid var(--line)}
+.timebar input{flex:1;accent-color:var(--accent)}
+.timebar output{font-size:13.5px;min-width:19ch;text-align:right}
+.timebar button{border:1.5px solid var(--accent);background:none;color:var(--accent);width:34px;height:30px;cursor:pointer;font-size:13px}
+.controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px 18px;font-size:14.5px}
+.controls fieldset{border:0;margin:0;padding:0;display:grid;gap:3px}
+.controls legend{font-size:14px;color:var(--muted);margin-bottom:4px}
+.layer{display:flex;align-items:center;gap:6px;cursor:pointer}
+.layer input{accent-color:var(--accent)}
+a.info{display:inline-grid;place-items:center;width:17px;height:17px;border:1px solid var(--line);border-radius:50%;font:600 11px/1 var(--font-data);text-decoration:none;color:var(--muted)}
+#legends{display:grid;gap:10px;align-content:start}
+.legend{font-size:13.5px}
+.legend .label{font-size:13px;color:var(--muted);margin-bottom:2px}
+.legend .ramp{display:flex;height:12px;border:1px solid var(--line)}
+.legend .ramp span{flex:1}
+.legend .ticks{display:flex;font:11px/1.4 var(--font-data);color:var(--muted)}
+.legend .ticks span{flex:1}
+.legend .swatch{display:inline-block;width:20px;border-top:2px solid;vertical-align:middle}
+.controls .note{grid-column:1/-1;margin:0}
+.maplibregl-popup-content{font:14px/1.45 var(--font-text);color:#221d1a}
+
+/* Guided tour (over the map) and quiz */
+.mapbox{position:relative}
+.tour{position:absolute;left:10px;bottom:56px;width:min(340px,calc(100% - 20px));max-height:calc(100% - 80px);overflow:auto;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 14px;font-size:14.5px;z-index:2}
+.tour p{margin:0 0 8px}
+.tour .label{color:var(--accent);font-size:13px}
+.tour-nav{display:flex;gap:8px;justify-content:flex-end}
+.tour-nav button,.tourline button{border:1.5px solid var(--accent);background:none;color:var(--accent);padding:4px 10px;cursor:pointer;font-size:13.5px}
+.tour-nav button:disabled{opacity:.35;cursor:default}
+.tourline{grid-column:1/-1;margin:0}
+.tourline button{background:var(--accent);color:#fff;font-size:14.5px;padding:6px 12px}
+.quiz{margin-top:24px}
+.quiz h3.label{margin:0 0 4px;color:var(--accent)}
+.quiz ol{padding-left:1.3em;margin:8px 0 0}
+.quiz li.q{margin:0 0 16px}
+.quiz li.q > p{margin:0 0 6px;font-weight:600}
+.quiz .opts{display:grid;gap:5px}
+.quiz .opts button{text-align:left;border:1px solid var(--line);background:var(--paper);color:inherit;padding:6px 10px;cursor:pointer;font:inherit;font-size:15.5px}
+.quiz .opts button:not(:disabled):hover{border-color:var(--accent)}
+.quiz .opts button.right{border-color:#15803d;background:#dcfce7;color:#14532d}
+.quiz .opts button.wrong{border-color:#b91c1c;background:#fee2e2;color:#7f1d1d}
+.quiz .opts button:disabled{cursor:default}
+.quiz .why{margin-top:6px;font-size:15.5px}
+.quiz .why p{margin:0}
+.quiz li.ok .why p:first-child::before{content:"✓ Correcto. ";font-weight:700;color:#15803d}
+.quiz li.ko .why p:first-child::before{content:"✗ No era esa. ";font-weight:700;color:#b91c1c}
+.quiz .score{font-weight:600;margin:0}
+
+/* Concept drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(500px,100vw);background:var(--paper);border-left:1px solid var(--line);box-shadow:-10px 0 30px -18px rgba(0,0,0,.5);transform:translateX(105%);transition:transform .22s ease;z-index:20;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer .close{position:absolute;top:8px;right:10px;border:0;background:none;font-size:30px;line-height:1;color:var(--muted);cursor:pointer}
+.drawer-body{overflow:auto;padding:20px 22px 40px}
+.drawer-body h2,.concept-card h2{margin:8px 0 4px;font:700 28px/1.05 var(--font-title);text-transform:uppercase;letter-spacing:.02em}
+.drawer-body h2 + .short,.concept-card .short{margin-top:0;font-size:18px;color:var(--muted)}
+.drawer-body h3,.concept-card h3{margin:20px 0 4px;font:600 19px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.05em;color:var(--accent)}
+.drawer-body .showlayers{border:1.5px solid var(--accent);background:none;color:var(--accent);padding:6px 10px;cursor:pointer;font-size:14px}
+
+/* Concepts and archive pages */
+.prose{max-width:860px;margin:0 auto;padding:8px 16px 32px}
+.prose h2,.prose h3{font-family:var(--font-title)}
+.intro h2{font:700 26px/1.1 var(--font-title);text-transform:uppercase;letter-spacing:.03em;margin:24px 0 6px}
+.intro h3{font:600 19px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.05em}
+.toc{padding-left:1.4em}
+.toc li{margin:3px 0}
+.concept-card{margin:22px 0;scroll-margin-top:12px}
+.concept-card > h2{font-size:30px}
+.archive-list{list-style:none;padding:0;display:grid;gap:10px}
+.archive-list .data{color:var(--accent);margin-right:8px}
+
+@media (max-width:900px){
+  .daygrid{grid-template-columns:1fr}
+  .mapcol{position:static}
+  .story{max-width:none}
+  #map{height:62vh}
+  .controls{grid-template-columns:1fr}
+}

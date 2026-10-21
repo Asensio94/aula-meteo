@@ -1,0 +1,7 @@
+.venv/
+scratch/
+data/
+site/
+*.grib2
+*.idx
+__pycache__/
