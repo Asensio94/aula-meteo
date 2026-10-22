@@ -24,20 +24,23 @@ a.view:hover{text-decoration:underline}
 .chart h2{margin:0 0 6px;font-size:20px}
 .chart img{display:block;width:100%;height:auto;border:1px solid var(--line);margin-top:8px}
 
-.mapcol{position:sticky;top:10px;display:grid;gap:10px}
-.mapbox{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
-#map{height:min(68vh,720px);min-height:360px}
+/* The column always fits the screen: the map takes what the controls leave, the controls scroll inside */
+.mapcol{position:sticky;top:10px;height:calc(100vh - 20px);display:flex;flex-direction:column;gap:8px}
+.mapbox{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);flex:1 1 0;min-height:300px;display:flex;flex-direction:column}
+#map{flex:1;min-height:0}
 .timebar{display:flex;align-items:center;gap:10px;padding:8px 10px;border-top:1px solid var(--line)}
 .timebar input{flex:1;accent-color:var(--accent)}
 .timebar output{font-size:13.5px;min-width:19ch;text-align:right}
 .timebar button{border:1.5px solid var(--accent);background:none;color:var(--accent);width:34px;height:30px;cursor:pointer;font-size:13px}
-.controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px 18px;font-size:14.5px}
-.controls fieldset{border:0;margin:0;padding:0;display:grid;gap:3px}
+.controls{flex:none;max-height:45%;overflow:auto;display:grid;gap:8px;font-size:14.5px;padding-right:4px}
+.controls fieldset{border:0;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px 14px}
 .controls legend{font-size:14px;color:var(--muted);margin-bottom:4px}
-.layer{display:flex;align-items:center;gap:6px;cursor:pointer}
+.layer{display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.layer span{overflow:hidden;text-overflow:ellipsis}
 .layer input{accent-color:var(--accent)}
 a.info{display:inline-grid;place-items:center;width:17px;height:17px;border:1px solid var(--line);border-radius:50%;font:600 11px/1 var(--font-data);text-decoration:none;color:var(--muted)}
-#legends{display:grid;gap:10px;align-content:start}
+#legends{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px 18px;align-content:start}
+#legends:empty{display:none}
 .legend{font-size:13.5px}
 .legend .label{font-size:13px;color:var(--muted);margin-bottom:2px}
 .legend .ramp{display:flex;height:12px;border:1px solid var(--line)}
@@ -99,8 +102,9 @@ a.info{display:inline-grid;place-items:center;width:17px;height:17px;border:1px 
 
 @media (max-width:900px){
   .daygrid{grid-template-columns:1fr}
-  .mapcol{position:static}
+  .mapcol{position:static;height:auto}
+  .mapbox{flex:none}
   .story{max-width:none}
-  #map{height:62vh}
-  .controls{grid-template-columns:1fr}
+  #map{flex:none;height:62vh}
+  .controls{max-height:none;overflow:visible}
 }
