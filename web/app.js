@@ -29,7 +29,7 @@
   const WIND = [  // km/h -> colour, from calm to storm force
     [0, "#64748b"], [20, "#0f766e"], [40, "#ca8a04"], [60, "#ea580c"], [80, "#b91c1c"], [100, "#6b21a8"],
   ];
-  const IMAGES = ["t850", "cape", "precip", "jet250"];  // drawn in this order; the satellite goes on top
+  const IMAGES = ["t850", "cape", "precip", "jet250"];  // drawn in this order, over the satellite
   const KINDS = {
     borrasca: { name: "Borrasca", label: "B", layer: "msl", color: "#c81e1e", size: 24 },
     anticiclon: { name: "Anticiclón", label: "A", layer: "msl", color: "#1d4ed8", size: 24 },
@@ -149,15 +149,16 @@
   map.on("load", () => {
     const s0 = stepData(state.step);
     const b = DAY.layers.bounds;
-    for (const id of IMAGES) {
-      shown[id] = s0.images[id] || blankPng();
-      map.addSource(id, { type: "image", url: shown[id], coordinates: b });
-      map.addLayer({ id, type: "raster", source: id, paint: { "raster-opacity": id === "t850" ? 0.8 : 0.85, "raster-fade-duration": 0, "raster-resampling": "linear" }, layout: { visibility: "none" } });
-    }
+    // The satellite covers the whole map, so it goes underneath: rain, CAPE or the jet still show on top of it.
     for (const id of Object.keys(SAT)) {  // sources are created now but only fetch tiles once visible
       shown[id] = satUrl(id, satTime(state.step, id));
       map.addSource(id, { type: "raster", tiles: [shown[id]], tileSize: 256 });
       map.addLayer({ id, type: "raster", source: id, paint: { "raster-opacity": 0.9 }, layout: { visibility: "none" } });
+    }
+    for (const id of IMAGES) {
+      shown[id] = s0.images[id] || blankPng();
+      map.addSource(id, { type: "image", url: shown[id], coordinates: b });
+      map.addLayer({ id, type: "raster", source: id, paint: { "raster-opacity": id === "t850" ? 0.8 : 0.85, "raster-fade-duration": 0, "raster-resampling": "linear" }, layout: { visibility: "none" } });
     }
     map.addLayer({ id: "coast", type: "line", source: "coast", paint: { "line-color": "#5b524c", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 0.7, 6, 1.4] } });
     map.addLayer({ id: "borders", type: "line", source: "borders", paint: { "line-color": "#8f857e", "line-width": 0.5, "line-dasharray": [2, 2] } });
@@ -309,7 +310,10 @@
       row.innerHTML = `<input type="checkbox" value="${L.id}"> <span>${L.name}</span>` +
         ` <a href="#" class="concept info" data-concept="${L.concept}" aria-label="Qué es: ${L.name}">?</a>`;
       row.querySelector("input").addEventListener("change", (e) => {
-        if (e.target.checked) { onlyOneSat(state.layers, L.id); state.layers.add(L.id); } else state.layers.delete(L.id);
+        if (e.target.checked) {
+          if (L.kind === "sat") onlyOneSat(state.layers, L.id);  // a new channel replaces the old one; other layers stay
+          state.layers.add(L.id);
+        } else state.layers.delete(L.id);
         applyLayers();
       });
       if (L.kind === "wind" && !DAY.layers.wind) row.hidden = true;  // days built before the wind layer existed
@@ -341,7 +345,9 @@
       if (lg) {
         const cells = lg.colors.map((c, i) => `<span style="background:${c}"></span>`).join("");
         const labels = lg.levels.map((v) => `<span>${fmtNum(v)}</span>`).join("");
-        parts.push(`<div class="legend"><div class="label">${lg.name} (${lg.unit})</div><div class="ramp">${cells}</div><div class="ticks">${labels}</div></div>`);
+        const none = !stepData(state.step).images[L.id];  // e.g. 12 h rain at +0 h: nothing has fallen yet
+        const why = none ? `<p class="note">${L.id === "precip" ? "Es la lluvia acumulada en las 12 h anteriores: a +0 h todavía no hay." : "Sin datos a esta hora."} Mueve la barra a +12 h o más.</p>` : "";
+        parts.push(`<div class="legend"><div class="label">${lg.name} (${lg.unit})</div><div class="ramp">${cells}</div><div class="ticks">${labels}</div>${why}</div>`);
       } else if (L.id === "msl") {
         parts.push(`<div class="legend"><span class="swatch" style="border-color:#1e293b"></span> Isobaras cada 4 hPa; más gruesas cada 20 (1000, 1020…). <b style="color:#c81e1e">B</b> borrasca, <b style="color:#1d4ed8">A</b> anticiclón.</div>`);
       } else if (L.id === "z500") {
