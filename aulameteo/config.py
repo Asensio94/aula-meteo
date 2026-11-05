@@ -28,6 +28,7 @@ FOCUS = {
 }
 
 KEEP_GRIB_DAYS = 2
+GITHUB_USER = "Asensio94"  # owner of the repo; publish.py pushes with this account's gh login
 KEEP_SITE_DAYS = 180  # ~2 MB a day: about 360 MB on GitHub Pages (limit 1 GB)
 
 # Headless Claude Code on the user's subscription ("opus", "sonnet" or a full model id).

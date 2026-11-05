@@ -7,6 +7,7 @@ body{background:var(--ground)}
 /* Day page: text on the left, sticky map on the right */
 .daygrid{max-width:1440px;margin:0 auto;padding:8px 16px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px;align-items:start}
 .story{max-width:68ch}
+.stale{max-width:1408px;margin:10px auto 0;padding:8px 14px;border-left:4px solid var(--accent);background:var(--paper);font-size:15.5px}
 .story p,.story li{hyphens:auto}
 .story h3.label{margin:26px 0 6px;font-size:17px;color:var(--muted)}
 .headline{margin:6px 0 8px;font:700 clamp(28px,3.4vw,40px)/1.05 var(--font-title);letter-spacing:.01em}

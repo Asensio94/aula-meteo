@@ -78,6 +78,22 @@
   const fmtTime = (d) => `${DAYS[d.getUTCDay()]} ${pad(d.getUTCDate())}/${pad(d.getUTCMonth() + 1)} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC`;
   const stepData = (h) => DAY.layers.steps.find((s) => s.step_h === h);
 
+  /* If the newest page is from a past day after midday, today's run failed: say so rather than
+     pass yesterday's maps off as today's. Older pages opened from the archive say nothing. */
+  (function staleNote() {
+    const day = DAY.run.slice(0, 10);
+    if (!window.LATEST || day !== window.LATEST) return;
+    const now = new Date();
+    const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+    const age = Math.round((Date.parse(today) - Date.parse(day)) / 864e5);
+    if (age < 1 || (age === 1 && now.getHours() < 12)) return;
+    const note = document.createElement("p");
+    note.className = "stale";
+    note.textContent = `Esta es la última clase publicada, del ${day.slice(8, 10)}/${day.slice(5, 7)}. ` +
+      "La de hoy no se ha generado todavía, así que los mapas y el texto no son de hoy.";
+    document.querySelector(".daygrid")?.before(note);
+  })();
+
   /* ------------------------------------------------------------------ map */
 
   const map = new maplibregl.Map({
