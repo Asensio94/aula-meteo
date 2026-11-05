@@ -81,7 +81,7 @@ def _footer():
 # Shared assets
 
 
-def write_assets(history):
+def write_assets(history, latest=None):
     assets = config.SITE / "assets"
     assets.mkdir(parents=True, exist_ok=True)
     for name in ("app.js", "app.css", "basemap.js"):
@@ -96,7 +96,9 @@ def write_assets(history):
             for c in cards}
     (assets / "concepts.js").write_text(
         "window.CONCEPTS = " + json.dumps(data, ensure_ascii=False) + ";\n"
-        "window.HISTORY = " + json.dumps(history, ensure_ascii=False) + ";\n", encoding="utf-8")
+        "window.HISTORY = " + json.dumps(history, ensure_ascii=False) + ";\n"
+        # newest published day: if that page is still the newest tomorrow, the daily run failed
+        "window.LATEST = " + json.dumps(latest) + ";\n", encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------------------------
@@ -366,7 +368,7 @@ def build_day(day, run, detections, layers_data, text, dwd, sat_time, generated)
 
 def rebuild_shared():
     history, entries = _history()
-    write_assets(history)
+    write_assets(history, entries[0]["date"] if entries else None)
     _page_concepts(history)
     _page_archive(entries)
     if entries:
