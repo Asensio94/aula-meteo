@@ -14,7 +14,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from . import config
+from . import config, detect
 from .concepts import LINK_RE, load_cards
 
 log = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ SCHEMA = {
         "titular": {"type": "string"},
         "entradilla": {"type": "string"},
         "europa": {"type": "string"},
-        "foco": {"type": "string"},
+        **{f["field"]: {"type": "string"} for f in config.FOCI},  # one section per focus region
         "leccion": {"type": "object",
                     "properties": {"concepto": {"type": "string"}, "texto": {"type": "string"}},
                     "required": ["concepto", "texto"]},
@@ -43,7 +43,8 @@ SCHEMA = {
                            "correcta": {"type": "integer"}, "explicacion": {"type": "string"}},
             "required": ["pregunta", "opciones", "correcta", "explicacion"]}},
     },
-    "required": ["titular", "entradilla", "europa", "foco", "leccion", "conceptos", "preguntas"],
+    "required": ["titular", "entradilla", "europa", *(f["field"] for f in config.FOCI),
+                 "leccion", "conceptos", "preguntas"],
 }
 
 
@@ -68,15 +69,17 @@ def facts(day, run, detections, dwd, sat, recent_lessons):
     return {
         "fecha_del_dia": day.isoformat(),
         "pasada_modelo": f"{run:%Y-%m-%d %H} UTC (ECMWF IFS 0,25°)",
-        "region_foco": config.FOCUS["name"],
+        "regiones_foco": [{"clave": f["key"], "campo_de_salida": f["field"], "nombre": f["name"],
+                           **({"detalle": f["detail"]["name"]} if "detail" in f else {})}
+                          for f in config.FOCI],
         "pasos": [{"paso_h": d["step_h"],
                    "valido_utc": f"{run + dt.timedelta(hours=d['step_h']):%Y-%m-%d %H:%M}",
-                   "sistemas": d["features"], "foco": d["focus"]}
+                   "sistemas": d["features"], "foco": detect.foci(d)}
                   for d in detections if d["step_h"] in STORY_STEPS],
-        # the focus summary is small, so it goes in every 12 h step: rain often peaks between story steps
+        # the focus summaries are small, so they go in every 12 h step: rain often peaks between story steps
         "foco_cada_12h": [{"paso_h": d["step_h"],
                            "valido_utc": f"{run + dt.timedelta(hours=d['step_h']):%Y-%m-%d %H:%M}",
-                           **d["focus"]} for d in detections],
+                           **detect.foci(d)} for d in detections],
         "analisis_dwd_valido_utc": f"{dwd['valid']:%Y-%m-%d %H:%M}" if dwd else None,
         "satelite_valido_utc": f"{sat['valid']:%Y-%m-%d %H:%M}" if sat else None,
         "conceptos": [{"slug": c["slug"], "titulo": c["title"], "resumen": c["short"]} for c in cards],
@@ -127,7 +130,8 @@ def explain(day, run, detections, chart_paths, dwd, sat, recent_lessons) -> dict
                     "duration_s": round(envelope.get("duration_ms", 0) / 1000),
                     "turns": envelope.get("num_turns"),
                     "reference_cost_usd": envelope.get("total_cost_usd")}
-    unknown = {m.group(1) for k in ("europa", "foco") for m in LINK_RE.finditer(out[k])} - \
+    sections = ["europa", *(f["field"] for f in config.FOCI)]
+    unknown = {m.group(1) for k in sections for m in LINK_RE.finditer(out.get(k, ""))} - \
               {c["slug"] for c in load_cards()}
     if unknown:
         log.warning("Explanation used unknown concept slugs (shown as plain text): %s", sorted(unknown))
