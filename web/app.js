@@ -523,11 +523,15 @@
     if (cape && cape.f.max_jkg >= 1000) stops.push({ f: cape.f, h: cape.h, zoom: 4, ids: "cape+msl", concept: "inestabilidad-y-cape",
       html: `<b>Energía para tormentas.</b> El CAPE mide cuánta energía tendría una burbuja de aire caliente para subir. ` +
         `Llega a ${fmtNum(cape.f.max_jkg)} J/kg ${cape.f.where}: si algo dispara el ascenso, ahí podrían crecer tormentas.` });
-    const fc = DAY.focus;
-    stops.push({ f: { lat: (fc.lat[0] + fc.lat[1]) / 2, lon: (fc.lon[0] + fc.lon[1]) / 2 }, h: DAY.defaultStep, zoom: 4,
-      ids: "t850+msl", concept: "masas-de-aire",
+    const foci = DAY.foci || [DAY.focus];  // pages built before France was added carry a single focus
+    const lats = foci.flatMap((f) => f.lat), lons = foci.flatMap((f) => f.lon);
+    const names = foci.map((f) => f.short || f.name);
+    stops.push({ f: { lat: (Math.min(...lats) + Math.max(...lats)) / 2, lon: (Math.min(...lons) + Math.max(...lons)) / 2 },
+      h: DAY.defaultStep, zoom: 4, ids: "t850+msl", concept: "masas-de-aire",
       html: `<b>Temperatura a unos 1500 m (850 hPa).</b> Muestra las masas de aire sin el ruido del día y la noche: ` +
-        "azules, aire frío; naranjas y rojos, aire cálido. Mueve la barra del tiempo y mira qué color avanza hacia la región foco (" + fc.name + ")." });
+        "azules, aire frío; naranjas y rojos, aire cálido. Mueve la barra del tiempo y mira qué color avanza hacia " +
+        (names.length > 1 ? "las regiones foco (" + names.slice(0, -1).join(", ") + " y " + names.at(-1) + ")."
+          : "la región foco (" + names[0] + ").") });
     stops.push({ f: { lat: 48, lon: 0 }, h: DAY.defaultStep, zoom: 3, ids: "sat+msl", concept: "satelite",
       html: "<b>Y ahora, la realidad.</b> El satélite muestra las nubes de verdad, casi en directo. Compara: " +
         "¿están las nubes donde el modelo pone las borrascas y la lluvia? Prueba también los canales de vapor de agua y de color." });
