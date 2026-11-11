@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula Meteo · 11/11/2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cstyle%3E.b%7Bfill%3A%23221d1a%7D.p%7Bfill%3A%232a7ab8%7D.l%7Bstroke%3A%23221d1a%7D%40media%20%28prefers-color-scheme%3Adark%29%7B.b%7Bfill%3A%23ede6e0%7D.p%7Bfill%3A%237bbcf0%7D.l%7Bstroke%3A%23ede6e0%7D%7D%3C/style%3E%3Cg%20class%3D%22b%22%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2231%22%20r%3D%2219%22/%3E%3Cpath%20d%3D%22M19%2040%207%2050.5l3.5%204L25%2046z%22/%3E%3Cpath%20d%3D%22M52%2022l8%202.5-8%202.5z%22/%3E%3C/g%3E%3Cpath%20class%3D%22p%22%20d%3D%22M34%2012a19%2019%200%200%201%2015%2030.8C42%2041%2037%2034%2037%2026c0-6%201.5-10.5%204-12.6A19%2019%200%200%200%2034%2012z%22/%3E%3Cg%20fill%3D%22%23221d1a%22%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2221.5%22%20r%3D%222.1%22/%3E%3C/g%3E%3Cpath%20class%3D%22l%22%20d%3D%22M31%2049.5V60m7-11v11m-10.5.2h6m1.5%200h6%22%20fill%3D%22none%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* common.css v1.1 — shared look of the nine open-data projects (vigia-incendios is the reference).
+   Copy this file verbatim into each repo; change it in all repos at once, never in one.
+   Each repo sets only --accent and --accent-dark below it and adds its own rules after it.
+
+   Type:  Barlow Condensed for titles and labels, Source Serif 4 for reading, IBM Plex Mono for
+          figures, codes and dates. Load them with:
+   https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap */
+
+:root{
+  --ground:#f0edea; --paper:#faf8f6; --ink:#221d1a; --muted:#6b625c; --line:#dad2cb;
+  --accent:#c2410c; --accent-dark:#fb7b3e;
+  --natura:#2f7a55; --natura-dark:#62b88a;
+  --shadow:0 1px 0 rgba(34,29,26,.06), 0 6px 18px -10px rgba(34,29,26,.28);
+  --font-title:"Barlow Condensed","Arial Narrow",sans-serif;
+  --font-text:"Source Serif 4",Georgia,serif;
+  --font-data:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+    --accent:var(--accent-dark); --natura:var(--natura-dark);
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+  --accent:var(--accent-dark); --natura:var(--natura-dark);
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:17px/1.55 var(--font-text);overflow-wrap:break-word}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+img,svg{max-width:100%}
+
+/* Header: «PROJECT NAME» with the key word in the accent colour, one sentence, then the figures. */
+.site-header{max-width:1440px;margin:0 auto;padding:28px 16px 18px;display:grid;gap:14px}
+.site-header h1{margin:0;font:700 clamp(40px,6vw,64px)/.9 var(--font-title);text-transform:uppercase;letter-spacing:.02em}
+.site-header h1 span{color:var(--accent)}
+/* Logo: the robin from logo.py before the title; same shape everywhere, breast in the accent. */
+.logo{display:inline-block;width:1.05em;height:1.05em;margin-right:.16em;vertical-align:-.13em;color:var(--ink);overflow:visible}
+.logo .logo-breast{fill:var(--accent)}
+.site-header .lede{margin:0;max-width:72ch;font-size:18px}
+.figures{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:12px 0 0;border-top:1px solid var(--line)}
+.figures div{display:grid;gap:2px}
+.figures b{font:600 30px/1 var(--font-data);font-variant-numeric:tabular-nums;color:var(--accent)}
+.figures span{font:600 13px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* Text roles */
+.label{font-family:var(--font-title);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.data{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.note{color:var(--muted);font-size:14.5px}
+.badge{display:inline-block;font:600 12px/1 var(--font-title);text-transform:uppercase;letter-spacing:.09em;padding:4px 7px 3px;border:1.5px solid currentColor;color:var(--accent)}
+
+/* Cards and panels */
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px}
+
+/* Method section: how every figure is computed, step by step */
+.method{max-width:1440px;margin:0 auto;padding:24px 16px}
+.method h2{margin:0 0 6px;font:700 28px/1 var(--font-title);text-transform:uppercase;letter-spacing:.03em}
+.method h3{margin:18px 0 4px;font:600 18px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.06em}
+.method p,.method li{max-width:72ch}
+table.params{border-collapse:collapse;font-size:14.5px;width:100%;max-width:900px}
+table.params th,table.params td{text-align:left;vertical-align:top;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)}
+table.params th{font:600 14px/1.3 var(--font-title);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding-right:16px}
+table.params td.num,table.params th.num{text-align:right;font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* Footer: sources, licence, the shared principle and the sibling projects */
+.site-footer{max-width:1440px;margin:0 auto;padding:16px 16px 40px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);display:grid;gap:10px}
+.site-footer .principle{margin:0;color:var(--ink);font-style:italic}
+.siblings{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none}
+.siblings li a{text-decoration-color:var(--line)}
+.siblings li[aria-current] a{color:var(--ink);text-decoration-color:var(--accent);font-weight:600}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .figures b{font-size:24px}
+}
+
+:root{--accent:#2a7ab8;--accent-dark:#7bbcf0}
+</style>
+<link rel="stylesheet" href="../../assets/app.css">
+<link rel="stylesheet" href="../../assets/maplibre-gl.css">
+</head>
+<body class="day">
+<header class="site-header">
+  <h1><a href="../../index.html" class="home"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="34" cy="31" r="19"/><path d="M19 40 7 50.5l3.5 4L25 46z"/><path d="M52 22l8 2.5-8 2.5z"/></g><path class="logo-breast" d="M34 12a19 19 0 0 1 15 30.8C42 41 37 34 37 26c0-6 1.5-10.5 4-12.6A19 19 0 0 0 34 12z"/><g fill="#221d1a"><circle cx="45" cy="21.5" r="2.1"/></g><path d="M31 49.5V60m7-11v11m-10.5.2h6m1.5 0h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Aula <span>Meteo</span></a></h1>
+  <p class="lede">Una clase diaria de meteorología con los mapas reales de hoy. Miércoles 11 de noviembre de 2026, pasada del modelo de las 00 UTC del 11/11.</p>
+  <div class="figures"><div><b>980 hPa</b><span>borrasca más profunda (0–72 h)</span></div><div><b>281 km/h</b><span>chorro más fuerte</span></div><div><b>121 mm</b><span>lluvia máx. en 12 h</span></div><div><b>11,9 °C</b><span>T 850 hPa, Península, +24 h</span></div><div><b>8,0 °C</b><span>T 850 hPa, Francia, +24 h</span></div></div>
+  <nav class="topnav label"><a href="../../index.html">Hoy</a><a href="../../conceptos.html">Conceptos</a><a href="../../archivo.html">Archivo</a></nav>
+</header>
+
+<main class="daygrid">
+  <article class="story">
+    <nav class="daynav label"><a href="../2026-11-10/index.html">← 10/11</a><span></span></nav>
+    <h2 class="headline">Una borrasca atlántica riega el sur peninsular y el frío baja hacia Francia</h2>
+    <p class="standfirst">Una borrasca profunda y lenta al oeste de la península empuja hoy lluvias fuertes hacia Andalucía y el sur de Francia. Después su energía se va al Mediterráneo mientras el aire frío del norte entra en Francia y la presión sube hacia el fin de semana.</p>
+    <h3 class="label">Europa y el Atlántico</h3>
+    <p>La protagonista del día es una <a class="concept" href="../../conceptos.html#borrasca" data-concept="borrasca">borrasca</a> de 983 hPa en pleno Atlántico, a unos 450 km al oeste de la península. En la <a class="concept" href="../../conceptos.html#carta-de-analisis" data-concept="carta-de-analisis">carta de análisis</a> del DWD de las 06 UTC aparece como una <strong>T</strong> de 985 hPa rodeada de muchas isobaras cerradas. Justo encima, en el <a class="concept" href="../../conceptos.html#geopotencial-500" data-concept="geopotencial-500">mapa de 500 hPa</a>, hay una bolsa de aire frío cerrada de 542 dam. Es decir, la borrasca está «apilada»: tiene el mismo centro abajo y arriba. Por eso se mueve despacio, como una peonza que gira casi en el sitio. <a class="view" href="#ver:44.5,-18.0,4,msl+z500,0">Mira aquí cómo coinciden los dos centros</a>.</p>
+<p>Por el flanco sur de la borrasca corre la <a class="concept" href="../../conceptos.html#corriente-en-chorro" data-concept="corriente-en-chorro">corriente en chorro</a>, con núcleos de unos 230 km/h que apuntan a Portugal. Ese río de viento en altura empuja aire húmedo y templado desde el sur hacia la península y Francia, y ahí nace una larga banda de lluvias que va de Marruecos al sur de Francia. <a class="view" href="#ver:40.0,-5.0,4,msl+precip,24">Fíjate en la banda de lluvia de esta noche</a>.</p>
+<p>Lo que pasa después, día a día:</p>
+<ul>
+<li><strong>Mañana (jueves):</strong> la borrasca empieza a rellenarse y suelta un centro secundario sobre Asturias, de 992,6 hPa a las 00 UTC. Mientras tanto, otra borrasca de 988 hPa se ahonda al oeste de Noruega.</li>
+<li><strong>Pasado mañana (viernes):</strong> la energía cruza al Mediterráneo. Al este de los Alpes se forma una borrasca de 987,5 hPa, con hasta 90 mm en 12 horas cerca del norte del Adriático. En el norte, la borrasca escandinava baja a 981,7 hPa sobre Suecia. Encima del Báltico tiene una bolsa fría de 510 dam y un chorro de 234 km/h. Por detrás, el aire frío del norte baja hacia Europa central. <a class="view" href="#ver:56.0,15.0,4,z500+t850,48">Mira la bolsa fría sobre el Báltico</a>.</li>
+<li><strong>Sábado (00 UTC):</strong> se instalan altas presiones sobre Londres (1020 hPa) y al noreste de los Alpes, con tiempo más tranquilo y frío en el centro del continente. En el Mediterráneo quedan bajas débiles sobre Córcega y el Adriático, con lluvias fuertes cerca de los Balcanes (hasta 96 mm).</li>
+</ul>
+<p>A +72 h el modelo dibuja además un chorro muy intenso, de 255 km/h, al norte de Azores, con nuevas borrascas detrás. Es la próxima pieza del puzle, pero a tres días su posición todavía puede cambiar bastante.</p>
+    <h3 class="label">En península ibérica y Baleares</h3>
+    <p><strong>Hoy (miércoles)</strong> la península queda en la cara delantera de la <a class="concept" href="../../conceptos.html#borrasca" data-concept="borrasca">borrasca</a> atlántica, con vientos del sur. Ese viento sube aire cálido y húmedo desde África. Por eso, a mediodía el modelo llega a 30,5 °C en algún punto del sur o del este, un valor muy alto para noviembre. Para que llueva, ese aire húmedo tiene que subir (<a class="concept" href="../../conceptos.html#precipitacion" data-concept="precipitacion">de dónde sale la lluvia</a>). Lo empujan hacia arriba la banda de nubes de la borrasca y el relieve. Hasta las 12 UTC caen hasta 53,6 mm en 12 horas. Entre las 12 y las 00 UTC llega lo más fuerte: hasta 84 mm sobre <strong>Andalucía occidental</strong>. A mediodía el viento alcanza rachas de unos 74 km/h. <a class="view" href="#ver:37.5,-5.5,5,precip+wind10,24">Mira dónde se concentra la lluvia</a>.</p>
+<p><strong>Mañana (jueves)</strong> el centro secundario sobre Asturias mantiene el tiempo revuelto. Durante el día siguen cayendo hasta 48 mm en 12 horas, y el viento llega a 69 km/h. En la madrugada del viernes la borrasca y su <a class="concept" href="../../conceptos.html#vaguada-y-dorsal" data-concept="vaguada-y-dorsal">vaguada</a> en altura están ya sobre Galicia.</p>
+<p><strong>Pasado mañana (viernes)</strong> cambia el escenario. El aire frío en altura llega sobre un Mediterráneo todavía templado, y la <a class="concept" href="../../conceptos.html#inestabilidad-y-cape" data-concept="inestabilidad-y-cape">energía para tormentas (CAPE)</a> sube hasta 2264 J/kg sobre <strong>Baleares</strong>. Es el ingrediente de las <a class="concept" href="../../conceptos.html#tormentas" data-concept="tormentas">tormentas</a>: chubascos fuertes, de hasta unos 39 mm en 12 horas. <a class="view" href="#ver:39.5,3.0,5,cape+precip,48">Mira el CAPE sobre Baleares</a>.</p>
+<p><strong>El sábado</strong> a medianoche la presión ya está entre 1010 y 1020 hPa y el aire es más frío. En el interior pueden darse heladas, con hasta −2,8 °C a medianoche. Baleares sigue con inestabilidad (1808 J/kg) y algún chubasco fuerte, de hasta 28 mm.</p>
+    <h3 class="label">En Francia</h3>
+    <p>En Francia la misma banda de lluvia llega por el sur. <strong>Hoy</strong> caen hasta 25,8 mm en la mañana. A mediodía hay algo de <a class="concept" href="../../conceptos.html#inestabilidad-y-cape" data-concept="inestabilidad-y-cape">inestabilidad</a> (hasta 1392 J/kg), así que en el sur no se descartan tormentas. En la carta del DWD de las 06 UTC se ve además un <a class="concept" href="../../conceptos.html#frentes" data-concept="frentes">frente cálido</a> que cruza el norte de Francia hacia los Alpes. Marca la frontera entre el aire templado del sur y el más fresco del norte.</p>
+<p><strong>Mañana (jueves)</strong> es el día más húmedo. Durante la jornada se acumulan hasta 59,3 mm en 12 horas. Por el mapa, lo más fuerte cae en el sur y el sureste, donde el viento del sur choca con el relieve. <a class="view" href="#ver:45.0,4.0,5,precip+msl,36">Mira la lluvia del jueves</a>.</p>
+<p><strong>Pasado mañana (viernes)</strong> entra el cambio importante: el aire frío que baja de Escandinavia. A 850 hPa (unos 1500 m) se pasa de valores de hasta 14 °C hoy a −3,4 °C en algunas zonas. Entre las bajas presiones del Mediterráneo y la presión que sube por el norte, el viento se refuerza hasta 53 km/h el viernes a mediodía. Es un esquema que suele favorecer <a class="concept" href="../../conceptos.html#vientos-regionales" data-concept="vientos-regionales">vientos regionales</a> como el mistral. <strong>El sábado</strong> a medianoche la presión llega a 1020 hPa y en las montañas el modelo marca hasta −10 °C.</p>
+<p><strong>París y alrededores:</strong> el miércoles, 11–13 °C a medianoche y unos 14–15 °C a mediodía. Puede caer alguna gota por la mañana (0,6 mm como mucho) y el viento es flojo, de hasta 13 km/h. El jueves, 8–11 °C a medianoche y solo 8–9 °C a mediodía, porque llega aire más frío. Lluvia casi nula (0,1–0,2 mm) y viento de hasta 20 km/h por la tarde. El viernes, 4–5 °C a medianoche y 9–10 °C a mediodía, seco y con viento de hasta 14 km/h. El sábado a medianoche, 2,5–3,5 °C, seco y con calma (10 km/h). La presión sube de 999 a casi 1020 hPa.</p>
+    <section class="lesson card">
+      <h3 class="label">Lección del día: Presión atmosférica e isobaras</h3>
+      <p>Hoy vamos a leer las <a class="concept" href="../../conceptos.html#presion-atmosferica" data-concept="presion-atmosferica">isobaras</a>. Son las líneas que unen puntos con la misma presión y en estos mapas van cada 4 hPa.</p>
+<ol>
+<li><a class="view" href="#ver:44.5,-18.0,4,msl,0">Mira aquí la borrasca atlántica de hoy</a>. Cuenta los anillos cerrados alrededor de la <strong>B</strong>. Cuantos más anillos y más juntos estén, más profunda es la borrasca y más fuerte sopla el viento a su alrededor.</li>
+<li>Pasa al paso +24. Verás que los anillos ya no son tan redondos y que aparece una segunda <strong>B</strong> sobre Asturias: la borrasca se está estirando y rellenando.</li>
+<li>Ahora busca París y sigue su presión: 1003 hPa hoy, 1001 el jueves, 1008 el viernes y casi 1020 el sábado. <a class="view" href="#ver:50.0,0.0,5,msl,72">Mira el mapa del sábado</a>: sobre Londres hay una <strong>A</strong> de 1020 hPa.</li>
+<li>Conclusión: si la presión sube de forma continuada, se acerca un <a class="concept" href="../../conceptos.html#anticiclon" data-concept="anticiclon">anticiclón</a>. Eso suele traer menos lluvia y vientos más flojos, aunque también noches más frías.</li>
+</ol>
+    </section>
+    <section class="quiz card" id="quiz">
+      <h3 class="label">Ponte a prueba</h3>
+      <p class="note">3 preguntas sobre el tiempo de hoy. Puedes mirar el mapa antes de contestar.</p>
+      <ol><li class="q" data-correct="1"><p>¿Por qué la borrasca atlántica de hoy se mueve tan despacio?</p>
+        <div class="opts"><button type="button">Porque un anticiclón sobre Islandia la frena</button><button type="button">Porque tiene una bolsa de aire frío justo encima, en 500 hPa, y está apilada</button><button type="button">Porque el chorro sopla flojo en todo el Atlántico</button><button type="button">Porque está anclada a la costa de Portugal</button></div><div class="why" hidden><p>En el <a class="concept" href="../../conceptos.html#geopotencial-500" data-concept="geopotencial-500">mapa de 500 hPa</a> hay un centro cerrado de 542 dam casi encima del centro de superficie de 983 hPa. Una borrasca apilada así apenas tiene viento en altura que la arrastre. <a class="view" href="#ver:44.5,-18.0,4,msl+z500,0">Mira aquí</a>.</p></div></li><li class="q" data-correct="2"><p>La presión en París pasa de unos 1003 hPa hoy a casi 1020 hPa el sábado. ¿Qué significa?</p>
+        <div class="opts"><button type="button">Que se acerca una borrasca profunda</button><button type="button">Que llegará una tormenta fuerte</button><button type="button">Que se acerca un anticiclón, con tiempo seco y viento flojo</button><button type="button">Nada: la presión no influye en el tiempo</button></div><div class="why" hidden><p>Cuando la presión sube de forma continuada, se acerca un <a class="concept" href="../../conceptos.html#anticiclon" data-concept="anticiclon">anticiclón</a>: el sábado hay una <strong>A</strong> de 1020 hPa sobre Londres. <a class="view" href="#ver:50.0,0.0,5,msl,72">Mira aquí</a>.</p></div></li><li class="q" data-correct="1"><p>¿Dónde es más probable que haya tormentas en la madrugada del viernes?</p>
+        <div class="opts"><button type="button">En París</button><button type="button">En Baleares</button><button type="button">En el interior de Galicia</button><button type="button">En Londres</button></div><div class="why" hidden><p>Sobre Baleares el <a class="concept" href="../../conceptos.html#inestabilidad-y-cape" data-concept="inestabilidad-y-cape">CAPE</a> llega a 2264 J/kg, porque el aire frío en altura llega sobre un mar todavía templado. <a class="view" href="#ver:39.5,3.0,5,cape,48">Mira aquí</a>.</p></div></li></ol>
+      <p class="score" aria-live="polite"></p>
+    </section>
+    <section class="chart card" id="carta">
+    <h2 class="label">La carta oficial</h2>
+    <p>Análisis de superficie del servicio meteorológico alemán (DWD) válido el 11/11/2026 a las 06 UTC,
+    dibujado por meteorólogos a partir de observaciones. Aquí sí hay frentes: azul con triángulos, frío; rojo con
+    semicírculos, cálido; morado, ocluido. Las borrascas son <b>T</b> y los anticiclones <b>H</b>.
+    <a class="concept" href="../../conceptos.html#carta-de-analisis" data-concept="carta-de-analisis">Cómo leer esta carta</a>.</p>
+    <a href="dwd_analysis.jpg" target="_blank" rel="noopener"><img src="dwd_analysis.jpg" alt="Carta de análisis de superficie del DWD con isobaras y frentes sobre el Atlántico norte y Europa" loading="lazy"></a>
+  </section>
+  </article>
+  <section class="mapcol" aria-label="Mapa interactivo">
+    <div class="mapbox">
+      <div id="map" role="application" aria-label="Mapa meteorológico de Europa"></div>
+      <div id="tour" class="tour" hidden aria-live="polite"></div>
+      <div class="timebar">
+        <button type="button" id="play" class="label" aria-label="Animar">▶</button>
+        <input type="range" id="step" min="0" max="72" step="12" aria-label="Hora de validez">
+        <output id="steplabel" class="data"></output>
+      </div>
+    </div>
+    <div class="controls">
+      <p class="tourline"><button type="button" id="tourbtn" class="label">Cómo leer el mapa de hoy</button></p>
+      <fieldset id="layers"><legend class="label">Capas</legend></fieldset>
+      <div id="legends"></div>
+      <p class="note" id="mapnote"></p>
+    </div>
+  </section>
+</main>
+<section class="method" id="metodo">
+  <h2>Cómo se hace</h2>
+  <ol>
+    <li><b>Datos del modelo.</b> Cada mañana se descarga la pasada de las 00 UTC del modelo IFS del ECMWF,
+    con resolución de 0,25° (unos 28 km), para Europa y el Atlántico (25–75° N, 45° O–50° E): presión al
+    nivel del mar, temperatura a 2 m y a 850 hPa, geopotencial de 500 hPa, viento a 10 m y a 250 hPa,
+    precipitación y CAPE, en siete pasos de +0 a +72 h.</li>
+    <li><b>Detección de sistemas.</b> Un programa busca los protagonistas del mapa con reglas sencillas
+    (tabla de abajo). Cada sistema detectado queda unido a la ficha que lo explica.</li>
+    <li><b>Imágenes reales.</b> Se añaden la última carta de análisis del DWD, dibujada por meteorólogos
+    con los frentes, y una imagen infrarroja de Meteosat. En el mapa, las capas de satélite (infrarrojo,
+    vapor de agua y color) se piden en directo al servidor de EUMETSAT al abrir la página.</li>
+    <li><b>Explicación.</b> Claude lee los sistemas detectados, los mapas del modelo, la carta y la imagen de
+    satélite, y redacta el texto del día con enlaces a las fichas y al mapa. Las cifras salen del paso 2;
+    si algo del texto no cuadra con el mapa, manda el mapa.</li>
+  </ol>
+  <table class="params">
+    <tr><th>Sistema</th><th>Regla</th></tr>
+    <tr><td>Borrasca (B) / anticiclón (A)</td><td>Mínimo / máximo de presión en un entorno de unos 500 km,
+      al menos 4 / 3 hPa por debajo / encima del anillo que lo rodea; se muestran las 7 / 5 más marcadas.</td></tr>
+    <tr><td>Baja fría en altura y DANA</td><td>Mínimo de geopotencial de 500 hPa rodeado por una isohipsa
+      cerrada (4 dam por encima). Es DANA si al sur no sopla viento del oeste en 250 hPa (&lt; 5 m/s) y está al
+      sur de 55° N.</td></tr>
+    <tr><td>Bloqueo</td><td>Alta cerrada en 500 hPa al norte de 45° N con una baja cerrada a su sur.</td></tr>
+    <tr><td>Vaguada / dorsal</td><td>Zonas de máxima curvatura del geopotencial de 500 hPa suavizado
+      (el 3 % más curvado).</td></tr>
+    <tr><td>Corriente en chorro</td><td>Núcleos con viento en 250 hPa de al menos 50 m/s (180 km/h).</td></tr>
+    <tr><td>Inestabilidad</td><td>CAPE de al menos 1.000 J/kg en un área amplia.</td></tr>
+    <tr><td>Lluvia intensa</td><td>Al menos 20 mm en 12 h en un área amplia.</td></tr>
+  </table>
+  <p class="note">Límites: el modelo tiene una resolución de unos 28 km y no ve tormentas concretas ni el
+  efecto fino del relieve. Los frentes no se calculan: se ven en la carta del DWD. A +72 h la predicción puede
+  cambiar bastante de un día a otro.</p>
+</section>
+
+<footer class="site-footer">
+  <p>Fuentes: modelo IFS del <a href="https://www.ecmwf.int/en/forecasts/datasets/open-data">ECMWF</a>
+  (datos abiertos, CC BY 4.0; «Contains modified ECMWF data»), imágenes Meteosat de
+  <a href="https://view.eumetsat.int/">EUMETSAT</a> (© EUMETSAT), carta de análisis del
+  <a href="https://opendata.dwd.de/weather/charts/analysis/">Deutscher Wetterdienst</a> (CC BY 4.0),
+  cartografía <a href="https://www.naturalearthdata.com/">Natural Earth</a> (dominio público) y mapa con
+  <a href="https://maplibre.org/">MapLibre GL</a>. Texto redactado cada día por Claude (Anthropic) a partir
+  de esos datos: es una explicación didáctica, no una predicción oficial ni un aviso. Para avisos, consulta
+  <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">AEMET</a>.</p>
+</footer>
+
+<aside id="drawer" class="drawer" aria-hidden="true" aria-labelledby="drawer-title">
+  <button type="button" class="close" aria-label="Cerrar ficha">×</button>
+  <div class="drawer-body"></div>
+</aside>
+<script src="../../assets/maplibre-gl.js"></script>
+<script src="../../assets/basemap.js"></script>
+<script src="../../assets/concepts.js"></script>
+<script src="data.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
