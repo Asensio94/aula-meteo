@@ -118,7 +118,11 @@ def explain(day, run, detections, chart_paths, dwd, sat, recent_lessons) -> dict
         raise RuntimeError(f"claude -p failed ({proc.returncode}): {proc.stderr[-2000:] or proc.stdout[-2000:]}")
     envelope = json.loads(proc.stdout)
     if envelope.get("is_error"):
-        raise RuntimeError(f"claude -p error: {envelope.get('result')}")
+        result = str(envelope.get("result"))
+        if "Failed to authenticate" in result or "Not logged in" in result:  # the login lasts weeks, then expires
+            raise RuntimeError(f"claude -p is not logged in ({result}). Log in again with: claude auth login "
+                               "and then: .\\run_daily.ps1")
+        raise RuntimeError(f"claude -p error: {result}")
     out = envelope.get("structured_output")
     if out is None:
         text = envelope["result"].strip().removeprefix("```json").removesuffix("```")

@@ -16,6 +16,8 @@ if ($code -ne 0) {
         $error_lines = if ($start -ge 0) { $tail[$start..($tail.Count - 1)] } else { @() }  # only today's error
         $hint = if ($error_lines -match "gh auth login") {
             "Ha caducado el login de GitHub. Ejecuta: gh auth login -h github.com y luego .\run_daily.ps1 --rebuild-site"
+        } elseif ($error_lines -match "claude auth login") {
+            "Ha caducado el login de Claude Code. Ejecuta: claude auth login y luego .\run_daily.ps1"
         } else {
             "Mira el registro: data\logs\$(Get-Date -Format yyyy-MM).log"
         }
