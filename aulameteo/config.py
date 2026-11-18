@@ -20,12 +20,16 @@ PL_PARAMS = ["gh", "t", "u", "v"]
 PL_LEVELS = [850, 500, 250]
 WIND10_PARAMS = ["10u", "10v"]  # own file, so runs downloaded before it was added still work
 
-# Zoom used by the second half of the daily explanation.
-FOCUS = {
-    "name": "península ibérica y Baleares",
-    "lat": (35.5, 44.5),
-    "lon": (-10.0, 4.5),
-}
+# Regions the daily explanation zooms into, each with its own section on the page. "field" is the
+# key of that section in Claude's JSON ("foco" stays for the Peninsula: days written before France
+# was added only have that one). "detail" is a smaller area summarised inside the region.
+FOCI = [
+    {"key": "peninsula", "field": "foco", "name": "península ibérica y Baleares", "short": "Península",
+     "lat": (35.5, 44.5), "lon": (-10.0, 4.5)},
+    {"key": "francia", "field": "francia", "name": "Francia", "short": "Francia",
+     "lat": (42.3, 51.1), "lon": (-5.0, 8.2),
+     "detail": {"name": "París y alrededores", "lat": (48.6, 49.15), "lon": (1.75, 2.85)}},
+]
 
 KEEP_GRIB_DAYS = 2
 GITHUB_USER = "Asensio94"  # owner of the repo; publish.py pushes with this account's gh login

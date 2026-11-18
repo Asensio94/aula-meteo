@@ -166,8 +166,8 @@ def hotspots(da, threshold, kind, concept, unit, top=3, min_cells=8):
     return sorted(spots, key=lambda s: -s[f"max_{unit}"])[:3]
 
 
-def focus_summary(ds_step):
-    f = config.FOCUS
+def focus_summary(ds_step, f):
+    """Ranges of the key fields inside one focus region (and its smaller detail area, if any)."""
     box = ds_step.sel(latitude=slice(f["lat"][1], f["lat"][0]), longitude=slice(f["lon"][0], f["lon"][1]))
     out = {
         "region": f["name"],
@@ -181,7 +181,15 @@ def focus_summary(ds_step):
     }
     if "wind10" in box:  # mean 10 m wind from the model, not gusts
         out["wind10_max_kmh"] = round(float(box.wind10.max()) * 3.6)
+    if "detail" in f:
+        out["detalle"] = focus_summary(ds_step, f["detail"])
     return out
+
+
+def foci(detection):
+    """Focus summaries of one step by region key. Days before France was added have a single one."""
+    fo = detection["focus"]
+    return {"peninsula": fo} if "region" in fo else fo
 
 
 def detect_step(ds, step_h):
@@ -191,7 +199,8 @@ def detect_step(ds, step_h):
     if step_h > 0:
         feats += hotspots(s.precip12, 20, "lluvia-intensa", "precipitacion", "mm", top=6)
     feats = [f for f in feats if in_scope(f)]
-    return {"step_h": int(step_h), "features": feats, "focus": focus_summary(s)}
+    return {"step_h": int(step_h), "features": feats,
+            "focus": {f["key"]: focus_summary(s, f) for f in config.FOCI}}
 
 
 def detect_all(ds):

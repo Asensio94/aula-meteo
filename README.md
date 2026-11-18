@@ -25,7 +25,8 @@ conceptos. Se genera en local y se publica en <https://asensio94.github.io/aula-
    suscripción del usuario, aislado de su configuración (prompt propio en `prompts/system.md`, sin
    ajustes, sin MCP, solo la herramienta Read, en un directorio de trabajo fuera de este árbol). Lee los
    sistemas detectados, dos láminas del modelo (`quicklook.py`), la carta del DWD y el satélite, y
-   devuelve JSON: titular, Europa, región foco, lección del día, tres preguntas de «Ponte a prueba» y
+   devuelve JSON: titular, Europa, una sección por región foco (península ibérica y Baleares; Francia,
+   con un párrafo para París y alrededores), lección del día, tres preguntas de «Ponte a prueba» y
    conceptos usados.
 6. **Web** (`site.py`, `web/app.js`): una página por día con el mapa (MapLibre), deslizador de
    tiempo, capas (flechas de viento que se densifican al acercarse; satélite en vivo en infrarrojo,
@@ -41,7 +42,7 @@ conceptos. Se genera en local y se publica en <https://asensio94.github.io/aula-
 
 Pendiente de forma sistemática (comparar la detección con la carta del DWD día a día). Revisado a
 mano el 20/10/2026: el texto generado usa las cifras de la detección (979 hPa, 89 mm en 12 h en el
-Atlántico, 71,5 mm en el foco…) y no inventa otras. Se le pasa el foco en todos los pasos de 12 h
+Atlántico, 71,5 mm en el foco…) y no inventa otras. Se le pasan las regiones foco en todos los pasos de 12 h
 para que no se pierda la lluvia que cae entre los pasos principales.
 
 ## Límites
@@ -72,7 +73,7 @@ python -m venv .venv
 ```
 
 `run_daily.ps1` siempre publica; para probar sin publicar, `.venv\Scripts\python -m aulameteo.daily`
-con las mismas opciones. La región foco y el modelo de Claude se cambian en `aulameteo/config.py`. Las fichas son Markdown
+con las mismas opciones. Las regiones foco (`FOCI`) y el modelo de Claude se cambian en `aulameteo/config.py`. Las fichas son Markdown
 en `concepts/`; en el texto, `[[slug|palabra]]` enlaza una ficha y `[mira aquí](#ver:LAT,LON,ZOOM,CAPAS,PASO)`
 mueve el mapa.
 

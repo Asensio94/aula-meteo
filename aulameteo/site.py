@@ -10,7 +10,7 @@ import shutil
 
 from PIL import Image
 
-from . import config
+from . import config, detect
 from .concepts import load_cards, load_intro, render
 from .logo import LOGO_SVG, favicon_link
 
@@ -111,7 +111,7 @@ def _figures(detections, run):
     deepest = min(lows, key=lambda f: f["hpa"]) if lows else None
     jets = [f for d in detections for f in d["features"] if f["kind"] == "chorro"]
     rain = [f for d in detections for f in d["features"] if f["kind"] == "lluvia-intensa"]
-    focus = by[24]["focus"] if 24 in by else detections[0]["focus"]
+    focus = detect.foci(by[24] if 24 in by else detections[0])
     items = []
     if deepest:
         items.append((f"{num(deepest['hpa'])} hPa", "borrasca más profunda (0–72 h)"))
@@ -119,7 +119,9 @@ def _figures(detections, run):
         items.append((f"{num(max(j['max_kmh'] for j in jets))} km/h", "chorro más fuerte"))
     if rain:
         items.append((f"{num(max(r['max_mm'] for r in rain))} mm", "lluvia máx. en 12 h"))
-    items.append((f"{num(focus['t850_c']['mean'], 1)} °C", "T 850 hPa en el foco, +24 h"))
+    for f in config.FOCI:
+        if f["key"] in focus:
+            items.append((f"{num(focus[f['key']]['t850_c']['mean'], 1)} °C", f"T 850 hPa, {f['short']}, +24 h"))
     cells = "".join(f"<div><b>{v}</b><span>{k}</span></div>" for v, k in items)
     return f'<div class="figures">{cells}</div>'
 
@@ -196,7 +198,12 @@ def _method():
 def _page_day(day, run, detections, layers_data, text, dwd, sat_time, generated, titles, days_list):
     root = "../../"
     europa = render(text["europa"], titles, root)
-    foco = render(text["foco"], titles, root)
+    foci = []  # one section per focus region the text covers (older days only have the Peninsula)
+    for f in config.FOCI:
+        if text.get(f["field"]):
+            foci.append(f'<h3 class="label">En {html.escape(f["name"])}</h3>\n    '
+                        + render(text[f["field"]], titles, root))
+    foci = "\n    ".join(foci)
     lesson = text["leccion"]
     lesson_slug = lesson["concepto"] if lesson["concepto"] in titles else None
     leccion = render(lesson["texto"], titles, root)
@@ -224,7 +231,7 @@ def _page_day(day, run, detections, layers_data, text, dwd, sat_time, generated,
         "generated": generated.strftime("%Y-%m-%dT%H:%MZ"),
         "satTime": sat_time.strftime("%Y-%m-%dT%H:%M:00Z"),
         "defaultStep": _default_step(run, generated),
-        "focus": config.FOCUS,
+        "foci": [f for f in config.FOCI if f["key"] in detect.foci(detections[0])],
         "layers": layers_data, "markers": _markers(detections),
     }
     out = config.SITE / "days" / day.isoformat()
@@ -243,8 +250,7 @@ def _page_day(day, run, detections, layers_data, text, dwd, sat_time, generated,
     <p class="standfirst">{html.escape(text['entradilla'])}</p>
     <h3 class="label">Europa y el Atlántico</h3>
     {europa}
-    <h3 class="label">En {html.escape(config.FOCUS['name'])}</h3>
-    {foco}
+    {foci}
     <section class="lesson card">
       <h3 class="label">{lesson_title}</h3>
       {leccion}
