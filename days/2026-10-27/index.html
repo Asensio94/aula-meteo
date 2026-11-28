@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula Meteo · 27/10/2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cstyle%3E.b%7Bfill%3A%23221d1a%7D.p%7Bfill%3A%232a7ab8%7D.l%7Bstroke%3A%23221d1a%7D%40media%20%28prefers-color-scheme%3Adark%29%7B.b%7Bfill%3A%23ede6e0%7D.p%7Bfill%3A%237bbcf0%7D.l%7Bstroke%3A%23ede6e0%7D%7D%3C/style%3E%3Cg%20class%3D%22b%22%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2231%22%20r%3D%2219%22/%3E%3Cpath%20d%3D%22M19%2040%207%2050.5l3.5%204L25%2046z%22/%3E%3Cpath%20d%3D%22M52%2022l8%202.5-8%202.5z%22/%3E%3C/g%3E%3Cpath%20class%3D%22p%22%20d%3D%22M34%2012a19%2019%200%200%201%2015%2030.8C42%2041%2037%2034%2037%2026c0-6%201.5-10.5%204-12.6A19%2019%200%200%200%2034%2012z%22/%3E%3Cg%20fill%3D%22%23221d1a%22%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2221.5%22%20r%3D%222.1%22/%3E%3C/g%3E%3Cpath%20class%3D%22l%22%20d%3D%22M31%2049.5V60m7-11v11m-10.5.2h6m1.5%200h6%22%20fill%3D%22none%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* common.css v1.1 — shared look of the nine open-data projects (vigia-incendios is the reference).
+   Copy this file verbatim into each repo; change it in all repos at once, never in one.
+   Each repo sets only --accent and --accent-dark below it and adds its own rules after it.
+
+   Type:  Barlow Condensed for titles and labels, Source Serif 4 for reading, IBM Plex Mono for
+          figures, codes and dates. Load them with:
+   https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap */
+
+:root{
+  --ground:#f0edea; --paper:#faf8f6; --ink:#221d1a; --muted:#6b625c; --line:#dad2cb;
+  --accent:#c2410c; --accent-dark:#fb7b3e;
+  --natura:#2f7a55; --natura-dark:#62b88a;
+  --shadow:0 1px 0 rgba(34,29,26,.06), 0 6px 18px -10px rgba(34,29,26,.28);
+  --font-title:"Barlow Condensed","Arial Narrow",sans-serif;
+  --font-text:"Source Serif 4",Georgia,serif;
+  --font-data:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+    --accent:var(--accent-dark); --natura:var(--natura-dark);
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+  --accent:var(--accent-dark); --natura:var(--natura-dark);
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:17px/1.55 var(--font-text);overflow-wrap:break-word}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+img,svg{max-width:100%}
+
+/* Header: «PROJECT NAME» with the key word in the accent colour, one sentence, then the figures. */
+.site-header{max-width:1440px;margin:0 auto;padding:28px 16px 18px;display:grid;gap:14px}
+.site-header h1{margin:0;font:700 clamp(40px,6vw,64px)/.9 var(--font-title);text-transform:uppercase;letter-spacing:.02em}
+.site-header h1 span{color:var(--accent)}
+/* Logo: the robin from logo.py before the title; same shape everywhere, breast in the accent. */
+.logo{display:inline-block;width:1.05em;height:1.05em;margin-right:.16em;vertical-align:-.13em;color:var(--ink);overflow:visible}
+.logo .logo-breast{fill:var(--accent)}
+.site-header .lede{margin:0;max-width:72ch;font-size:18px}
+.figures{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:12px 0 0;border-top:1px solid var(--line)}
+.figures div{display:grid;gap:2px}
+.figures b{font:600 30px/1 var(--font-data);font-variant-numeric:tabular-nums;color:var(--accent)}
+.figures span{font:600 13px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* Text roles */
+.label{font-family:var(--font-title);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.data{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.note{color:var(--muted);font-size:14.5px}
+.badge{display:inline-block;font:600 12px/1 var(--font-title);text-transform:uppercase;letter-spacing:.09em;padding:4px 7px 3px;border:1.5px solid currentColor;color:var(--accent)}
+
+/* Cards and panels */
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px}
+
+/* Method section: how every figure is computed, step by step */
+.method{max-width:1440px;margin:0 auto;padding:24px 16px}
+.method h2{margin:0 0 6px;font:700 28px/1 var(--font-title);text-transform:uppercase;letter-spacing:.03em}
+.method h3{margin:18px 0 4px;font:600 18px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.06em}
+.method p,.method li{max-width:72ch}
+table.params{border-collapse:collapse;font-size:14.5px;width:100%;max-width:900px}
+table.params th,table.params td{text-align:left;vertical-align:top;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)}
+table.params th{font:600 14px/1.3 var(--font-title);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding-right:16px}
+table.params td.num,table.params th.num{text-align:right;font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* Footer: sources, licence, the shared principle and the sibling projects */
+.site-footer{max-width:1440px;margin:0 auto;padding:16px 16px 40px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);display:grid;gap:10px}
+.site-footer .principle{margin:0;color:var(--ink);font-style:italic}
+.siblings{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none}
+.siblings li a{text-decoration-color:var(--line)}
+.siblings li[aria-current] a{color:var(--ink);text-decoration-color:var(--accent);font-weight:600}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .figures b{font-size:24px}
+}
+
+:root{--accent:#2a7ab8;--accent-dark:#7bbcf0}
+</style>
+<link rel="stylesheet" href="../../assets/app.css">
+<link rel="stylesheet" href="../../assets/maplibre-gl.css">
+</head>
+<body class="day">
+<header class="site-header">
+  <h1><a href="../../index.html" class="home"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="34" cy="31" r="19"/><path d="M19 40 7 50.5l3.5 4L25 46z"/><path d="M52 22l8 2.5-8 2.5z"/></g><path class="logo-breast" d="M34 12a19 19 0 0 1 15 30.8C42 41 37 34 37 26c0-6 1.5-10.5 4-12.6A19 19 0 0 0 34 12z"/><g fill="#221d1a"><circle cx="45" cy="21.5" r="2.1"/></g><path d="M31 49.5V60m7-11v11m-10.5.2h6m1.5 0h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Aula <span>Meteo</span></a></h1>
+  <p class="lede">Una clase diaria de meteorología con los mapas reales de hoy. Martes 27 de octubre de 2026, pasada del modelo de las 00 UTC del 27/10.</p>
+  <div class="figures"><div><b>946 hPa</b><span>borrasca más profunda (0–72 h)</span></div><div><b>279 km/h</b><span>chorro más fuerte</span></div><div><b>104 mm</b><span>lluvia máx. en 12 h</span></div><div><b>11,4 °C</b><span>T 850 hPa en el foco, +24 h</span></div></div>
+  <nav class="topnav label"><a href="../../index.html">Hoy</a><a href="../../conceptos.html">Conceptos</a><a href="../../archivo.html">Archivo</a></nav>
+</header>
+
+<main class="daygrid">
+  <article class="story">
+    <nav class="daynav label"><a href="../2026-10-26/index.html">← 26/10</a><span></span></nav>
+    <h2 class="headline">Un frente frío refresca la Península y una DANA riega Grecia</h2>
+    <p class="standfirst">Hoy un frente frío cruza el norte peninsular y detrás llega un anticiclón con aire más fresco y noches frías. Mientras, una bolsa de aire frío en altura se queda atascada sobre Grecia y por el Atlántico se acerca una nueva borrasca.</p>
+    <h3 class="label">Europa y el Atlántico</h3>
+    <p>El protagonista del Atlántico norte es una <a class="concept" href="../../conceptos.html#borrasca" data-concept="borrasca">borrasca</a> muy profunda, de unos 955 hPa, situada hoy a las 00 UTC al sur de Islandia. Sus <a class="concept" href="../../conceptos.html#presion-atmosferica" data-concept="presion-atmosferica">isobaras</a> están muy apretadas, y eso significa viento fuerte en el mar entre Islandia, Irlanda y Escocia. Por encima, la <a class="concept" href="../../conceptos.html#corriente-en-chorro" data-concept="corriente-en-chorro">corriente en chorro</a> cruza Irlanda a unos 247 km/h. <a class="view" href="#ver:57.0,-12.0,4,msl+jet250,0">Mira aquí</a>.</p>
+<p>De esa borrasca cuelga un <a class="concept" href="../../conceptos.html#frentes" data-concept="frentes">frente frío</a> larguísimo. En la <a class="concept" href="../../conceptos.html#carta-de-analisis" data-concept="carta-de-analisis">carta del DWD</a> de las 06 UTC aparece en azul. Baja desde el mar del Norte, pasa por el canal de la Mancha y llega hasta el oeste de Galicia. En el <a class="concept" href="../../conceptos.html#satelite" data-concept="satelite">satélite</a> es esa banda de nubes estrecha y curvada que desciende por el Atlántico (<a class="view" href="#ver:46.0,-10.0,4,sat,0">fíjate en la banda nubosa</a>). Hoy el frente barre el norte peninsular y deja detrás aire más fresco.</p>
+<p>Mañana la borrasca se retira al este de Islandia y el escenario cambia. Un <a class="concept" href="../../conceptos.html#anticiclon" data-concept="anticiclon">anticiclón</a> de unos 1028 hPa se instala sobre el golfo de Vizcaya. El jueves se traslada a Alemania, con unos 1030 hPa. Es una muralla de altas presiones que aparta a las borrascas de Europa central.</p>
+<p>En el otro extremo del Mediterráneo pasa algo muy distinto. Una bolsa de aire frío en altura se descuelga sobre los Balcanes y mañana queda cerrada al oeste de Grecia: es una <a class="concept" href="../../conceptos.html#dana" data-concept="dana">DANA</a>. Bajo ella se forma una borrasca pequeña en el sur del Egeo, y el modelo calcula lluvias fuertes: hasta 68 mm en 12 h sobre Grecia y más de 80 mm cerca de Chipre el jueves (<a class="view" href="#ver:38.0,26.0,5,z500+precip,48">mira aquí</a>). Como va suelta, la DANA avanza despacio hacia Chipre y Turquía.</p>
+<p>La tercera pieza llega por el oeste. Mañana nace una nueva borrasca en mitad del Atlántico, de unos 984 hPa, y el jueves se acerca a las Azores ya más débil. Para el viernes 30, el modelo la deshace en varias bajas poco profundas al oeste de la Península y al norte de Canarias, con una banda de lluvia intensa en alta mar. Al mismo tiempo, el chorro se refuerza al oeste de Irlanda hasta unos 279 km/h y una <a class="concept" href="../../conceptos.html#vaguada-y-dorsal" data-concept="vaguada-y-dorsal">vaguada</a> profunda se mete en el Atlántico (<a class="view" href="#ver:45.0,-20.0,4,msl+precip+jet250,72">mira aquí</a>). A 72 horas, la posición exacta de esas bajas todavía puede cambiar bastante.</p>
+    <h3 class="label">En península ibérica y Baleares</h3>
+    <p><strong>Hoy</strong> el <a class="concept" href="../../conceptos.html#frentes" data-concept="frentes">frente frío</a> cruza el norte. Entre las 00 y las 12 UTC el modelo deja hasta 13 mm en 12 h. Lo más probable es que caigan en Galicia y el Cantábrico, que son las primeras zonas a las que llega el frente. Más al sur el día sigue siendo templado, con máximas cercanas a 27–28 °C en los puntos más cálidos.</p>
+<p>Detrás del frente entra una <a class="concept" href="../../conceptos.html#masas-de-aire" data-concept="masas-de-aire">masa de aire</a> más fresca. A 850 hPa (unos 1500 m), la temperatura media de la región baja de 14,5 °C esta medianoche a unos 11 °C mañana. En el norte se queda en solo 1–2 °C (<a class="view" href="#ver:41.0,-3.0,5,t850+wind10,24">mira aquí</a>).</p>
+<p><strong>Mañana y el jueves</strong> manda el <a class="concept" href="../../conceptos.html#anticiclon" data-concept="anticiclon">anticiclón</a> de Vizcaya. Bajo él el aire desciende, así que habrá cielos más despejados, poco viento y noches frías. El jueves de madrugada el modelo marca unos 1 °C a 2 m en algún punto del interior. Con noches así de largas y aire en calma, no sería raro que se formen <a class="concept" href="../../conceptos.html#niebla" data-concept="niebla">nieblas</a> en los valles.</p>
+<p>Aun así, no todo será seco. El modelo prevé chubascos aislados, de hasta 7–9 mm en 12 h, entre mañana y el jueves. También indica <a class="concept" href="../../conceptos.html#inestabilidad-y-cape" data-concept="inestabilidad-y-cape">CAPE</a> de hasta unos 1000 J/kg, y casi 1200 J/kg el viernes de madrugada. Eso es energía suficiente para alguna tormenta suelta. Para saber dónde, <a class="view" href="#ver:39.5,0.0,5,cape,72">comprueba la capa de CAPE</a>. Lo habitual en otoño es que esté sobre el Mediterráneo, que todavía conserva calor.</p>
+<p>El viento no será protagonista. Lo más fuerte es hoy, con unos 52 km/h ligados al frente. El <strong>viernes</strong>, las bajas atlánticas podrían traer más nubes y alguna lluvia al oeste, pero a ese plazo es una tendencia y no una certeza.</p>
+    <section class="lesson card">
+      <h3 class="label">Lección del día: DANA (depresión aislada en niveles altos)</h3>
+      <p>Vamos a ver cómo nace una <a class="concept" href="../../conceptos.html#dana" data-concept="dana">DANA</a> con el caso de Grecia.</p>
+<ol>
+<li>Abre el <a class="concept" href="../../conceptos.html#geopotencial-500" data-concept="geopotencial-500">mapa de 500 hPa</a> de hoy a las 00 UTC (<a class="view" href="#ver:44.0,20.0,4,z500,0">mira aquí</a>). Sobre los Balcanes, las líneas forman una U que apunta al sur. Es una <a class="concept" href="../../conceptos.html#vaguada-y-dorsal" data-concept="vaguada-y-dorsal">vaguada</a> que todavía está unida a la circulación general.</li>
+<li>Avanza a +24 h (<a class="view" href="#ver:39.5,20.0,5,z500+t850,24">mira aquí</a>). Ahora las líneas se cierran en círculos al oeste de Grecia, con un mínimo de unos 549 dam. La bolsa fría se ha «descolgado» del flujo del oeste: eso ya es una DANA.</li>
+<li>Añade la precipitación a +48 h (<a class="view" href="#ver:37.0,27.0,5,z500+precip,48">mira aquí</a>). Las lluvias fuertes se reparten alrededor de la DANA, sobre Grecia y cerca de Chipre, donde el aire húmedo del mar se ve obligado a subir.</li>
+<li>Avanza a +72 h. La DANA sigue ahí, ahora cerca de Chipre. Como no la arrastra el chorro, se mueve despacio, y por eso puede dejar lluvia varios días en la misma zona.</li>
+</ol>
+    </section>
+    <section class="quiz card" id="quiz">
+      <h3 class="label">Ponte a prueba</h3>
+      <p class="note">3 preguntas sobre el tiempo de hoy. Puedes mirar el mapa antes de contestar.</p>
+      <ol><li class="q" data-correct="1"><p>Mañana, sobre Grecia, ¿qué convierte esa bolsa de aire frío en una DANA?</p>
+        <div class="opts"><button type="button">Que su presión en superficie es muy baja</button><button type="button">Que sus líneas de 500 hPa se cierran y se separa del flujo general</button><button type="button">Que tiene un anticiclón justo encima</button><button type="button">Que el chorro la cruza a más de 250 km/h</button></div><div class="why" hidden><p>Una DANA se define en altura: es una bolsa fría rodeada de líneas cerradas en 500 hPa y separada de la circulación del oeste. En superficie solo hay una borrasca débil, de unos 1010 hPa. <a class="view" href="#ver:39.5,20.0,5,z500,24">Mira aquí</a> y repasa la ficha de la <a class="concept" href="../../conceptos.html#dana" data-concept="dana">DANA</a>.</p></div></li><li class="q" data-correct="2"><p>¿Por qué mañana y el jueves llueve tan poco en la península ibérica?</p>
+        <div class="opts"><button type="button">Porque la DANA de Grecia se lleva toda la humedad</button><button type="button">Porque el chorro pasa justo encima de la Península</button><button type="button">Porque se instala un anticiclón sobre el golfo de Vizcaya</button><button type="button">Porque la borrasca de Islandia se acerca a Galicia</button></div><div class="why" hidden><p>Tras el frente, un anticiclón de unos 1028 hPa se sitúa sobre Vizcaya. Bajo él el aire desciende y eso frena la formación de nubes. <a class="view" href="#ver:44.0,-5.0,5,msl+precip,24">Mira aquí</a> y repasa la ficha del <a class="concept" href="../../conceptos.html#anticiclon" data-concept="anticiclon">anticiclón</a>.</p></div></li><li class="q" data-correct="0"><p>Hoy a las 00 UTC, ¿dónde soplará más fuerte el viento en superficie?</p>
+        <div class="opts"><button type="button">Entre Islandia, Irlanda y Escocia</button><button type="button">Sobre el centro de la Península</button><button type="button">Sobre Marruecos</button><button type="button">En el mar Adriático</button></div><div class="why" hidden><p>Cuanto más juntas están las isobaras, más fuerte sopla el viento, y alrededor de la borrasca de 955 hPa están muy apretadas. <a class="view" href="#ver:58.0,-12.0,4,msl+wind10,0">Mira aquí</a> y repasa la ficha <a class="concept" href="../../conceptos.html#viento-y-presion" data-concept="viento-y-presion">por qué sopla el viento</a>.</p></div></li></ol>
+      <p class="score" aria-live="polite"></p>
+    </section>
+    <section class="chart card" id="carta">
+    <h2 class="label">La carta oficial</h2>
+    <p>Análisis de superficie del servicio meteorológico alemán (DWD) válido el 27/10/2026 a las 06 UTC,
+    dibujado por meteorólogos a partir de observaciones. Aquí sí hay frentes: azul con triángulos, frío; rojo con
+    semicírculos, cálido; morado, ocluido. Las borrascas son <b>T</b> y los anticiclones <b>H</b>.
+    <a class="concept" href="../../conceptos.html#carta-de-analisis" data-concept="carta-de-analisis">Cómo leer esta carta</a>.</p>
+    <a href="dwd_analysis.jpg" target="_blank" rel="noopener"><img src="dwd_analysis.jpg" alt="Carta de análisis de superficie del DWD con isobaras y frentes sobre el Atlántico norte y Europa" loading="lazy"></a>
+  </section>
+  </article>
+  <section class="mapcol" aria-label="Mapa interactivo">
+    <div class="mapbox">
+      <div id="map" role="application" aria-label="Mapa meteorológico de Europa"></div>
+      <div id="tour" class="tour" hidden aria-live="polite"></div>
+      <div class="timebar">
+        <button type="button" id="play" class="label" aria-label="Animar">▶</button>
+        <input type="range" id="step" min="0" max="72" step="12" aria-label="Hora de validez">
+        <output id="steplabel" class="data"></output>
+      </div>
+    </div>
+    <div class="controls">
+      <p class="tourline"><button type="button" id="tourbtn" class="label">Cómo leer el mapa de hoy</button></p>
+      <fieldset id="layers"><legend class="label">Capas</legend></fieldset>
+      <div id="legends"></div>
+      <p class="note" id="mapnote"></p>
+    </div>
+  </section>
+</main>
+<section class="method" id="metodo">
+  <h2>Cómo se hace</h2>
+  <ol>
+    <li><b>Datos del modelo.</b> Cada mañana se descarga la pasada de las 00 UTC del modelo IFS del ECMWF,
+    con resolución de 0,25° (unos 28 km), para Europa y el Atlántico (25–75° N, 45° O–50° E): presión al
+    nivel del mar, temperatura a 2 m y a 850 hPa, geopotencial de 500 hPa, viento a 10 m y a 250 hPa,
+    precipitación y CAPE, en siete pasos de +0 a +72 h.</li>
+    <li><b>Detección de sistemas.</b> Un programa busca los protagonistas del mapa con reglas sencillas
+    (tabla de abajo). Cada sistema detectado queda unido a la ficha que lo explica.</li>
+    <li><b>Imágenes reales.</b> Se añaden la última carta de análisis del DWD, dibujada por meteorólogos
+    con los frentes, y una imagen infrarroja de Meteosat. En el mapa, las capas de satélite (infrarrojo,
+    vapor de agua y color) se piden en directo al servidor de EUMETSAT al abrir la página.</li>
+    <li><b>Explicación.</b> Claude lee los sistemas detectados, los mapas del modelo, la carta y la imagen de
+    satélite, y redacta el texto del día con enlaces a las fichas y al mapa. Las cifras salen del paso 2;
+    si algo del texto no cuadra con el mapa, manda el mapa.</li>
+  </ol>
+  <table class="params">
+    <tr><th>Sistema</th><th>Regla</th></tr>
+    <tr><td>Borrasca (B) / anticiclón (A)</td><td>Mínimo / máximo de presión en un entorno de unos 500 km,
+      al menos 4 / 3 hPa por debajo / encima del anillo que lo rodea; se muestran las 7 / 5 más marcadas.</td></tr>
+    <tr><td>Baja fría en altura y DANA</td><td>Mínimo de geopotencial de 500 hPa rodeado por una isohipsa
+      cerrada (4 dam por encima). Es DANA si al sur no sopla viento del oeste en 250 hPa (&lt; 5 m/s) y está al
+      sur de 55° N.</td></tr>
+    <tr><td>Bloqueo</td><td>Alta cerrada en 500 hPa al norte de 45° N con una baja cerrada a su sur.</td></tr>
+    <tr><td>Vaguada / dorsal</td><td>Zonas de máxima curvatura del geopotencial de 500 hPa suavizado
+      (el 3 % más curvado).</td></tr>
+    <tr><td>Corriente en chorro</td><td>Núcleos con viento en 250 hPa de al menos 50 m/s (180 km/h).</td></tr>
+    <tr><td>Inestabilidad</td><td>CAPE de al menos 1.000 J/kg en un área amplia.</td></tr>
+    <tr><td>Lluvia intensa</td><td>Al menos 20 mm en 12 h en un área amplia.</td></tr>
+  </table>
+  <p class="note">Límites: el modelo tiene una resolución de unos 28 km y no ve tormentas concretas ni el
+  efecto fino del relieve. Los frentes no se calculan: se ven en la carta del DWD. A +72 h la predicción puede
+  cambiar bastante de un día a otro.</p>
+</section>
+
+<footer class="site-footer">
+  <p>Fuentes: modelo IFS del <a href="https://www.ecmwf.int/en/forecasts/datasets/open-data">ECMWF</a>
+  (datos abiertos, CC BY 4.0; «Contains modified ECMWF data»), imágenes Meteosat de
+  <a href="https://view.eumetsat.int/">EUMETSAT</a> (© EUMETSAT), carta de análisis del
+  <a href="https://opendata.dwd.de/weather/charts/analysis/">Deutscher Wetterdienst</a> (CC BY 4.0),
+  cartografía <a href="https://www.naturalearthdata.com/">Natural Earth</a> (dominio público) y mapa con
+  <a href="https://maplibre.org/">MapLibre GL</a>. Texto redactado cada día por Claude (Anthropic) a partir
+  de esos datos: es una explicación didáctica, no una predicción oficial ni un aviso. Para avisos, consulta
+  <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">AEMET</a>.</p>
+</footer>
+
+<aside id="drawer" class="drawer" aria-hidden="true" aria-labelledby="drawer-title">
+  <button type="button" class="close" aria-label="Cerrar ficha">×</button>
+  <div class="drawer-body"></div>
+</aside>
+<script src="../../assets/maplibre-gl.js"></script>
+<script src="../../assets/basemap.js"></script>
+<script src="../../assets/concepts.js"></script>
+<script src="data.js"></script>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
